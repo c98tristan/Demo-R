@@ -6,6 +6,7 @@ import Main from "./Layout/Main";
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
 import { Buffer } from "buffer";
+import User from "./components/User/User";
 
 // @ts-ignore
 window.Buffer = Buffer;
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login></Login>,
+      },
+      {
+        path: "/user",
+        element: <User></User>,
       },
     ],
   },

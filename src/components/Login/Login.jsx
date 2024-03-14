@@ -25,6 +25,7 @@ const Login = () => {
   const googleProvider = new GoogleAuthProvider();
   googleProvider.addScope("https://www.googleapis.com/auth/drive.appdata");
   googleProvider.addScope("https://www.googleapis.com/auth/drive.file");
+  googleProvider.addScope("https://www.googleapis.com/auth/datastore");
 
   const uploadEncryptedFileToAppDataFolder = async (
     encryptedData,
@@ -57,6 +58,19 @@ const Login = () => {
         setFileId(result.id);
       })
       .catch((error) => console.error(error));
+  };
+
+  const signInWithGoogle = async () => {
+    const CLIENT_ID =
+      "1047857429856-dps0bonbcr548lpt9v2p906ol7504uoq.apps.googleusercontent.com";
+    const REDIRECT_URI = "http://127.0.0.1:5173/user";
+    const SCOPES =
+      "https://www.googleapis.com/auth/drive.appdata profile email";
+    const AUTH_URL = `https://accounts.google.com/o/oauth2/auth?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=token&scope=${encodeURIComponent(
+      SCOPES
+    )}`;
+
+    window.location.href = AUTH_URL;
   };
 
   const handleGoogleSignIn = async () => {
@@ -163,6 +177,7 @@ const Login = () => {
       ) : (
         <div>
           <button onClick={handleGoogleSignIn}>Google Login</button>
+          <button onClick={signInWithGoogle}>Google Login2</button>
         </div>
       )}
       {user && (
